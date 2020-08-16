@@ -1,0 +1,41 @@
+{
+  "name": "api-recetas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapacheverdugo/recetas-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapacheverdugo/recetas-api/issues"
+  },
+  "homepage": "https://github.com/mapacheverdugo/recetas-api#readme",
+  "dependencies": {
+    "apple-signin": "^1.0.9",
+    "aws-sdk": "^2.688.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "googleapis": "^51.0.0",
+    "hashids": "^2.2.1",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.15",
+    "mongoose-paginate-v2": "^1.3.9",
+    "mongoose-sequence": "^5.2.2",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
