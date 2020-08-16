@@ -27,6 +27,7 @@ router.put("/usuarios/:usuarioId/seguir", verificarUsuario, usuario.toggleSeguir
 router.post("/usuarios/login/facebook", usuario.loginFacebook);
 router.post("/usuarios/login/apple", usuario.loginApple);
 router.post("/usuarios/login/google", usuario.loginGoogle);
+router.post("/usuarios/login", usuario.login);
 
 // Recetas
 router.get("/recetas", verificarUsuario, receta.listarTodas);

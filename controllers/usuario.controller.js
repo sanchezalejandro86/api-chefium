@@ -864,3 +864,50 @@ exports.loginApple = async (req, res) => {
     });
   }
 };
+
+exports.login = async (req, res) => {  
+  try {    
+    console.log(req.body);    
+    if (req.body && req.body.username && req.body.password) {      
+      let usuario;
+   
+      let busqueda = await Usuario.findOne({          
+          $and: [{              
+            correo: req.body.username,            
+          },
+          { 
+            clave: req.body.password,            
+          },          
+        ],        
+      })        
+      .populate("recetas")        
+      .populate("favoritas");
+      
+      console.log(busqueda);
+
+      if (busqueda) {        
+        usuario = busqueda;                
+        let token = jwt.sign({            
+            _id: usuario._id,            
+            rol: usuario.rol == "administrador" ? 0 : 1,          
+          },          
+          process.env.JWT_SECRETO, {            
+            expiresIn: process.env.JWT_CADUCIDAD,          
+          }        
+        );
+            
+        res.status(200).json({          
+          token,          
+          ...usuario._doc,        
+        });      
+      }else{        
+        res.status(403).json("Wrong credentials");       
+      }    
+    }  
+  } catch (error) {    
+    console.log(error);    
+    res.status(500).json({      
+      error,    
+    });  
+  }
+};

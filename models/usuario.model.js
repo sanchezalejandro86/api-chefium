@@ -42,6 +42,10 @@ var usuarioSchema = mongoose.Schema({
     unique: true,
     trim: true,
   },
+  clave: {
+    type: String,
+    select: false
+  },
   facebookId: {
     type: String,
     required: false,
