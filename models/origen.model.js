@@ -8,6 +8,11 @@ var origenSchema = mongoose.Schema({
         unique: true,
         trim: true,
     },
+    paisISO3166_1:{
+        type: String,
+        unique: true,
+        trim: true,
+    },
     creadoPor: {
         type: Number,
         ref: "Usuario",

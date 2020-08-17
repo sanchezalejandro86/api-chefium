@@ -67,6 +67,9 @@ exports.actualizar = async (req, res) => {
       if (req.body.descripcion) {
         dieta.descripcion = req.body.descripcion;
       }
+      if (req.body.icono) {
+        dieta.icono = req.body.icono;
+      }
       dieta.actualizadoPor = req.usuario._id;
       await dieta.save();
       console.log(

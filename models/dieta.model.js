@@ -8,6 +8,11 @@ var dietaSchema = mongoose.Schema({
         unique: true,
         trim: true,
     },
+    icono: {
+        type: String,
+        unique: false,
+        trim: true,
+    },
     creadoPor: {
         type: Number,
         ref: "Usuario",

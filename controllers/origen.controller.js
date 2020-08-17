@@ -67,6 +67,9 @@ exports.actualizar = async (req, res) => {
       if (req.body.descripcion) {
         origen.descripcion = req.body.descripcion;
       }
+      if (req.body.paisISO3166_1) {
+        origen.paisISO3166_1 = req.body.paisISO3166_1;
+      }
       origen.actualizadoPor = req.usuario._id;
       await origen.save();
       console.log(
