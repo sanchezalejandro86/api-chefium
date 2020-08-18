@@ -391,7 +391,7 @@ exports.toggleFavorita = async (req, res) => {
         usuario.favoritas = [];
       }
 
-      if (receta.usuario != req.usuario._id) {
+      //if (receta.usuario != req.usuario._id) {
         if (usuario.favoritas.indexOf(req.params.recetaId) != -1) {
           // Si ya está agregada a favoritos, se elimina
           usuario.favoritas = usuario.favoritas.filter(
@@ -419,11 +419,11 @@ exports.toggleFavorita = async (req, res) => {
           resultado: true,
           quedoFavorita
         });
-      } else {
+      /*} else {
         res.status(400).json({
           error: "No puede añadir a favoritas su propia receta",
         });
-      }
+      }*/
     } else {
       res.status(400).json({
         error: "No coinciden los usuarios",
