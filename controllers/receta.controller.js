@@ -487,6 +487,9 @@ exports.actualizar = async (req, res) => {
                   }
                   resolve(paso);
                 } else {
+                  for (let i = 0; i < 3; i++) {
+                    paso.fotos = pasosConFotosOriginales[j].fotos;
+                  }
                   resolve(paso);
                 }
               });
