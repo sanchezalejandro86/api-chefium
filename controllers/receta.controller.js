@@ -411,8 +411,8 @@ exports.actualizar = async (req, res) => {
           receta.descripcion = req.body.descripcion;
         }
 
-        if (req.body.momentoComida != null) {
-          receta.momentoComida = req.body.momentoComida;
+        if (req.body.categorias != null) {
+          receta.categorias = req.body.categorias;
         }
 
         if (req.body.dietas != null) {
@@ -427,6 +427,14 @@ exports.actualizar = async (req, res) => {
           receta.origen = req.body.origen;
         }
 
+        if (req.body.tips != null) {
+          receta.tips = req.body.tips;
+        }
+
+        if (req.body.ingredientes != null) {
+          receta.ingredientes = req.body.ingredientes;
+        }
+
         if (req.body.pasos != null) {
           receta.pasos = req.body.pasos.map(paso => {
             return {
@@ -435,6 +443,8 @@ exports.actualizar = async (req, res) => {
             }
           });
         }
+
+        //TODO update ingredientes 
 
         await Receta.findByIdAndUpdate(req.params.recetaId, receta);
 
@@ -492,8 +502,21 @@ exports.actualizar = async (req, res) => {
           );
         }
 
+        let receta2 = await Receta.findById(req.params.recetaId, "-favoritaDe")
+        .populate({
+          path: "usuario",
+          select: "-favoritas -recetas",
+        })
+        .populate({
+          path: "categorias dietas origen ingredientes.ingrediente",
+          select: "descripcion paisISO3166_1 icono foto",
+        })
+        .lean()
+        .exec();
+  
+      
         res.status(201).json({
-          ...receta,
+          ...receta2,
           ...{
             esMia: true,
             esFavorita: false,
