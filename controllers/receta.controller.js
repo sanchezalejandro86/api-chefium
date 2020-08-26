@@ -483,7 +483,9 @@ exports.actualizar = async (req, res) => {
                   });
                   let fotosNuevas = await Promise.all(fotosPromises);
                   for (let i = 0; i < 3; i++) {
-                    paso.fotos[i] = fotosNuevas[i] ? (fotosNuevas[i] == "" ? null : fotosNuevas[i]) : pasosConFotosOriginales[j].fotos[i];
+                    paso.fotos[i] = fotosNuevas[i] ? 
+                                      (fotosNuevas[i] == "" ? null : fotosNuevas[i]) 
+                                      : (pasosConFotosOriginales[j] ? pasosConFotosOriginales[j].fotos[i] : null);
                   }
                   resolve(paso);
                 } else {
