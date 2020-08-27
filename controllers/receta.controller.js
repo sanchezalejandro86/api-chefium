@@ -419,10 +419,14 @@ exports.actualizar = async (req, res) => {
           receta.dietas = req.body.dietas;
         }
 
-        if (req.body.raciones != null) {
-          receta.raciones = req.body.raciones;
+        if (req.body.porciones != null) {
+          receta.porciones = req.body.porciones;
         }
 
+        if (req.body.tiempoPreparacionMinutos != null) {
+          receta.tiempoPreparacionMinutos = req.body.tiempoPreparacionMinutos;
+        }
+        
         if (req.body.origen != null) {
           receta.origen = req.body.origen;
         }
