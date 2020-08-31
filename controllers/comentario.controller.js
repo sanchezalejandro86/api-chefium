@@ -241,38 +241,47 @@ exports.crear = async (req, res) => {
 exports.actualizar = async (req, res) => {
   try {
     if (req.body) {
-      let comentario = await Comentario.findById(req.params.comentarioId)
-        .populate({
-          path: "creadoPor",
-          select: "-favoritas -recetas",
-        })
+      let recetaId = req.params.recetaId || req.body.receta;
 
-      if (req.usuario.rol == 0 || comentario.creadoPor._id == req.usuario._id) {
-        if (req.body.contenido != null) {
-          comentario.contenido = req.body.contenido;
-        }
+      let receta = await Receta.findById(recetaId);
+      if (receta) { 
+        let comentario = await Comentario.findById(req.params.comentarioId)
+          .populate({
+            path: "creadoPor",
+            select: "-favoritas -recetas",
+          })
 
-        await comentario.save();
-
-        try {
-          if (req.body.foto) {
-            let path = await s3Upload(req.body.foto, `recetas/${receta._id}/comentarios/${comentario._id}`);
-            comentario.foto = path;
-            await comentario.save();
+        if (req.usuario.rol == 0 || comentario.creadoPor._id == req.usuario._id) {
+          if (req.body.contenido != null) {
+            comentario.contenido = req.body.contenido;
           }
-        } catch (error) {
-          console.log("No se pudo actualizar la foto", error);
-        }
 
-        res.status(201).json({
-          ...comentario,
-          ...{
-            esMio: comentario.creadoPor._id == req.usuario._id,
-          },
-        });
+          await comentario.save();
+
+          try {
+            if (req.body.foto) {
+              let path = await s3Upload(req.body.foto, `recetas/${receta._id}/comentarios/${comentario._id}`);
+              comentario.foto = path;
+              await comentario.save();
+            }
+          } catch (error) {
+            console.log("No se pudo actualizar la foto", error);
+          }
+
+          res.status(201).json({
+            ...comentario,
+            ...{
+              esMio: comentario.creadoPor._id == req.usuario._id,
+            },
+          });
+        } else {
+          res.status(403).json({
+            error: "No tiene permiso para actualizar este comentario",
+          });
+        }
       } else {
-        res.status(403).json({
-          error: "No tiene permiso para actualizar este comentario",
+        res.status(400).json({
+          error: "La receta ingresada no existe",
         });
       }
     } else {
@@ -280,6 +289,7 @@ exports.actualizar = async (req, res) => {
         error: "Debe ingresar los datos a actualizar",
       });
     }
+    
   } catch (err) {
     console.log(err);
     res.status(500).json({

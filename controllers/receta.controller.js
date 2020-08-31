@@ -53,46 +53,57 @@ var findQueryByQueryUrl = (queryUrl, usuarioId) => {
             arreglo.push({
               titulo: {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               descripcion: {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "origen.descripcion": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "dietas.descripcion": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "categorias.descripcion": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "usuario.nombres": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "usuario.apellidos": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "pasos.descripcion": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "instancias.nombre": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               "instancias.ingredientes.ingrediente.descripcion": {
                 $regex: query,
+                $options: 'i'
               },
             }, {
               tips: {
                 $regex: query,
+                $options: 'i'
               },
             });
           }
