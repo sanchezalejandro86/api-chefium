@@ -158,11 +158,11 @@ var findQueryByQueryUrl = (queryUrl, usuarioId) => {
               },
             }, ],
           };
-          let cantidadQuery = {};
+          /*let cantidadQuery = {};
           cantidadQuery[`ingredientes.${ingredientes.length}`] = {
             $exists: false,
           };
-          ingredientesQuery.$and.push(cantidadQuery);
+          ingredientesQuery.$and.push(cantidadQuery);*/
           findQuery.$and.push(ingredientesQuery);
         }
       }
